@@ -2,4 +2,4 @@
 repo for displaying demos of projects
 
 
-[Bouncing Balls Game](Bouncing Balls/BouncingBalls-complete.html)
+(https://drgaud.github.io/Bouncing Balls/BouncingBalls-complete.html)
