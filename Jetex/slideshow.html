@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <title>Slideshow examples</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <!-- Site logo goes here -->
+            <object data="images/icons/random.svg" type="image/svg+xml"></object>
+            
+        </div>
+        <div class="email"><a href="mailto:mr.important@random.inc" title="Open Email Client to send E-mail">mr.Important@random.inc</a></div>
+        <div class="telephone"><h3>+(44)0800 333 5555</h3></div>
+    </div>
+    <nav class="navbar">
+        <ul class="nav-parentList">
+            <li class="link-wrapper">
+                <a href="#" class="link">Home</a>
+            </li>
+            <li class="link-wrapper">
+                
+                <a href="#" class="link">About</a>
+            </li>
+            <li class="link-wrapper">
+                <a href="#" class="link">Services</a>
+
+            </li>
+            <li class="link-wrapper">
+                <a href="#" class="link">Contact</a>
+
+            </li>
+        </ul>
+    </nav>
+    <section class="section" id="section-js">
+    <h2>Slide Show in JS</h2>
+        <div class="slideshow-container  " id="slideshow-container">
+            <!-- Slide 1 -->
+            <div class="slide  " id="slide-one" data-index="0">
+                <h2 class="textbox textbox-title-mods-one ">
+                    This a Title
+                </h2>
+                <p class="textbox textbox-subtitle-mods-one">
+                    This is the subtitle
+                </p>
+                <div class="bg-one">
+                    <!-- This is where the slide goes in the CSS Background -->
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide  " id="slide-two" data-index="1">
+                <h2 class="textbox textbox-title-mods-two ">
+                    This a Title
+                </h2>
+                <p class="textbox textbox-subtitle-mods-two ">
+                    This is the subtitle
+                </p>
+                <div class="bg-two"></div>
+                
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide  " id="slide-three" data-index="2">
+                <h2 class="textbox textbox-title-mods-three ">
+                    Slide 3
+                </h2>
+                <p class="textbox textbox-subtitle-mods-three ">
+                    
+                </p>
+                <div class="bg-three"></div>
+                
+            </div>
+            <!-- Slide 4 -->
+            <div class="slide  " id="slide-four" data-index="3">
+                <h2 class="textbox textbox-title-mods-four ">
+                    Slide 4
+                </h2>
+                <p class="textbox textbox-subtitle-mods-four ">
+                   
+                </p>
+                <div class="bg-four"></div>
+                
+            </div>
+            <!-- Previous button -->
+            <div class="buttons-box">
+                <button class="navArrow prevArrow" id="prevArrow" onclick="prev()">
+                    &#10094; 
+                </button>
+                <!-- Next button -->
+                <button class="navArrow nxtArrow" id="nxtArrow" onclick="next()">
+                    &#10095; 
+                </button>
+            </div>
+        </div>
+</section>
+</body>
+<script src="slideshow.js" defer></script>
+</html>

@@ -1,0 +1,292 @@
+*,::before,::after{
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+}
+body{
+    margin:0;
+    padding: 0;
+    height: 100%;
+}
+:root{
+    margin:0;
+    padding:0;
+
+    width: 100vw;
+}
+
+/* Display controls */
+.active{
+    display: block;
+}
+.hidden{
+    display: none;
+}
+
+
+/* Header Properties */
+
+.header {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.navbar {
+    display: block;
+    position: relative;
+}
+   
+.nav-parentList {
+    list-style-type: none;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+   
+   
+.logo{
+    width:-webkit-fit-content;
+    width:-moz-fit-content;
+    width:fit-content;
+}
+.logo > object{
+    /* SVG Box */
+    display: block;
+    height: 10vh;
+    width:20vh;
+  
+}
+
+.email::before{
+    content: ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Section Properties */
+.section{
+    display: block;
+    position: relative;
+    margin:10px auto;
+    width:95vw;
+}
+.section > h2{
+    margin: auto;
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+/* SlideShow Container Properties */
+.slideshow-container{
+    position: relative;
+    display: block;
+    height: 45vh;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+.slide{
+    
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* fallback color */
+    background-color: cadetblue;
+}
+
+
+/* Image container */
+.slide div{
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+}
+
+/* Text Properties */
+.textbox{
+    /* This is necessary to position the Text Within the Container */
+    position: absolute;
+    display: block;
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    overflow: hidden;
+}
+
+
+/* Navigation Buttons Styles */
+.navArrow{
+    /* Button Styles */
+    text-align: center;
+    min-width: 3vw;
+    width: 5vw;
+    height: 5vh;
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    background: none;
+    font-size: 1.5em;
+    color: antiquewhite;
+    outline: auto;
+    opacity: 0.5;
+    transition: all 0.2s;
+    cursor: pointer;
+ 
+}
+
+/* Button Transition on Hover */
+.navArrow:hover{
+    transform: scale(1.2);
+}
+
+/* Button Transition on Active */
+.navArrow:active{
+    transform: scale(1);
+}
+
+.nxtArrow{
+    /* Next Arrow button Position */
+    position: absolute;
+    top:45%;
+    right:1.5%;
+}
+.prevArrow{
+    /* Prev Arrow Button Position */
+    position: absolute;
+    top: 45%;
+    left:1.5%;
+}
+
+
+/* Slide 1 properties */
+/* Background */
+.bg-one{
+    /* Background Image Properties */
+    background: url('./images/img1/img1-Large.jpg') ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+/* Text */
+.textbox-title-mods-one {
+    left: 45%;
+}
+
+.textbox-subtitle-mods-one{
+    /* Positioning Subtitle */
+    top:40%;
+    left:45%;
+    /* Effects */
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    padding:0.5em
+}
+/* Slide 2 properties */
+/* Background */
+.bg-two{
+    
+    /* Background Image Properties */
+    background: url('./images/img2/img2-Large.jpg') ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+/* Text */
+.textbox-title-mods-two {
+    top: 50%;
+    left: 10%;
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    padding:0.2em;
+    color: white;
+}
+
+.textbox-subtitle-mods-two{
+    /* Positioning Subtitle */
+    top:70%;
+    left:10%;
+    /* Effects */
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    padding:0.5em;
+    color:white;
+}
+/* Slide 3 properties */
+/* Background */
+.bg-three{
+    
+    /* Background Image Properties */
+    background: url('./images/img3/img3-Large.jpg') ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center ;
+}
+/* Text */
+.textbox-title-mods-three {
+    top:15%;
+    right:10%;
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    padding:0.2em;
+    color: white;
+}
+
+.textbox-subtitle-mods-three{
+    /* Positioning Subtitle */
+    top:30%;
+    right:10%;
+    /* Effects */
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    padding:0.5em;
+    color:white;
+}
+.bg-four{
+    
+    /* Background Image Properties */
+    background: url('./images/img4/img4-Large.jpg') ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center ;
+}
+/* Text */
+.textbox-title-mods-four {
+    top: 41%;
+    left: 45%;
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    padding:0.2em;
+    color: white;
+}
+
+.textbox-subtitle-mods-four{
+    /* Positioning Subtitle */
+    top:30%;
+    right:10%;
+    /* Effects */
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    padding:0.5em;
+    color:white;
+}
+
+
