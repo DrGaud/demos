@@ -2,4 +2,5 @@
 repo for displaying demos of projects
 
 
-https://drgaud.github.io/Bouncing_Balls/BouncingBalls-complete.html
+(Bouncing Balls)[https://github.com/DrGaud/demos/blob/master/Bouncing_Balls/BouncingBalls-complete.html]
+{Popeye for President)[https://github.com/DrGaud/demos/blob/master/Custom%20Video%20Player/index.html]
