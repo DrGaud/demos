@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>asteroids Game</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    canvas{
+        display: block;
+        position: relative;
+        /* margin: 3rem auto; */
+        width: 100%;
+        height:100vh;
+        overflow: hidden;
+        overflow-y: hidden;
+    }
+    #score{
+        position: absolute;
+        left: 90%;
+        color: ghostwhite;
+        z-index: 1;
+    }
+    #lives{
+        position: absolute;
+        left: 80%;
+        color: ghostwhite;
+        z-index: 1;
+    }
+</style>
+<body>
+    <p id="score"></p>
+    <p id="lives"></p>
+    <canvas id="gameCanvas">
+        <p>Huh, your browser doesn't seem to support HTML5! Sorry bud,</p>
+    </canvas>
+</body>
+<script src="game.js"></script>
+<!-- <script src="tutorial.js"></script> -->
+</html>
