@@ -1,0 +1,1170 @@
+<!DOCTYPE html><html><head>
+      <title>asteroidsGameWriteup</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/peter/.vscode-server/extensions/shd101wyy.markdown-preview-enhanced-0.5.13/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="an-oop-guide-to-creating-an-asteroids-game-using-vanilla-js">An OOP guide to Creating an Asteroids Game using Vanilla JS</h1>
+
+<p>written by drGaud.</p>
+<p>I had came across this youtube video on how to create a game that is a childhood favourite of mine. The legendary Asteroids from Atari.<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup><br>
+<a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=H9CSWMxJx84
+" target="_blank"><img src="http://img.youtube.com/vi/H9CSWMxJx84/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10"></a><br>
+I figured why the hell not, I am getting a bit better at Javascript why not give this a shot. Credits to the instructor for making a throughly enjoyable code-along video tutorial of this game.</p>
+<p>What made this particular tutorial &apos;enjoyable&apos; was that the instructor was using pre-ES6 standards in the script. It wasn&apos;t written in good old &apos;strict mode&apos; and could of done with some Object Orientated Approach. In a way this was what I have been learning whilst I have been meandering my way through the Javascript delta. So I figured as a challenge to make a similar program to what was demonstrated in the video but bring it up to spec.</p>
+<h2 class="mume-header" id="lets-begin">Lets Begin</h2>
+
+<p>I wish to let you know, I have made this script extremely verbose by using JSDocs <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>. This commenting style has alot of benefits not only readability but also with use with IDE&apos;s. I comment on everything, and make my code as close to English as possible, apart from the math, that is just the nature of maths unfortunately.</p>
+<p>Lets begin by getting the boilerplate stuff out the way.</p>
+<p>We are going to be needing a <code>asteroidGame.html</code> file and a <code>game.js</code> script file within the same directory.</p>
+<p><code>asteroidGame.html</code> should look like this:</p>
+<pre data-role="codeBlock" data-info="html" class="language-html"><span class="token doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>en<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>UTF-8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>viewport<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>width=device-width, initial-scale=1.0<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Asteroids Game<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+    <span class="token selector">*</span><span class="token punctuation">{</span>
+        <span class="token property">margin</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token property">padding</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">canvas</span><span class="token punctuation">{</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+        <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+        <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">%</span><span class="token punctuation">;</span>
+        <span class="token property">height</span><span class="token punctuation">:</span><span class="token number">100</span><span class="token unit">vh</span><span class="token punctuation">;</span>
+        <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+        <span class="token property">overflow-y</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>canvas</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>gameCanvas<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Huh, your browser doesn&apos;t seem to support HTML5! Sorry bud,<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>canvas</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>game.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</pre><p>Quickly explaining what is going on here. We have a couple of basic style rules to allow the game to be applied to the full size of the viewport.<br>
+Within the <code>&lt;canvas&gt;</code> element we have a fallback tag in case the browser doesn&apos;t support the canvas element.<br>
+Now load the html file through your local dev server and have it open. This was we can see the work that will be done in the JS being reflected in the browser.</p>
+<p>Now the boilerplate for the <code>game.js</code> is a lot easier. At the top of the file we will be adding the &apos;Strict Mode&apos; Command to the Global Environment, being at the top, this sets the rest of the script to adhere to following the ECMA - Standards of writing JavaScript. It should look like this:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token string">&apos;use strict&apos;</span><span class="token punctuation">;</span> <span class="token comment">//Placed on line 1</span>
+</pre><h3 class="mume-header" id="setup-the-canvas">Setup the Canvas</h3>
+
+<p>To set-up the canvas for the game, we first have to grab the canvas from the DOM.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> canvas <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&apos;gameCanvas&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Next we set-up the context for the canvas, stating that we will be using a 2-Dimensional plane instead of a 3-Dimensional one.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> ctx <span class="token operator">=</span> canvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">&apos;2d&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><h3 class="mume-header" id="setting-up-the-animation-loop">Setting up the Animation Loop</h3>
+
+<p>Now lets get something on the screen. To do this we will be using the <code>requestAnimationFrame API</code> here the original tutorial had setup their own animation loop using <code>setInterval()</code> running at 30 fps which was creating sever amount of <em>janking</em> motion when it was rendering. But by using the <code>requestAnimationFrame</code> the performance of the script was notably improved but it  forced my hand to having to do the tutorial in a different way.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">//place this at the bottom of the script</span>
+<span class="token keyword">function</span> <span class="token function">gameAnimation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//Draw the Background -Space</span>
+    ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">&quot;black&quot;</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">fillRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>width<span class="token punctuation">,</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//Do other stuff here</span>
+
+
+    <span class="token comment">//Request animation frame</span>
+    <span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span>gameAnimation<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+<span class="token comment">//Starting the Game Animation</span>
+<span class="token function">gameAnimation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>You should have a black screen that occupies the full viewport.<br>
+<img src="./imgs/BlackCanvas.png"><br>
+Next up we will be adding some functions that we will be needing throughout the script in various places so we will put them in the global scope.</p>
+<h2 class="mume-header" id="reusable-functions">Reusable Functions</h2>
+
+<p>I like to keep the global variables and functions right at the top of the script.<br>
+We will be adding to it as we go so its good to understand where to put the stuff that belongs in the global scope.</p>
+<h4 class="mume-header" id="random-number-generator">Random Number Generator</h4>
+
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">/**
+ * @function RandomNumber Generator
+ * @param {Number} min -Lowest Number in Range
+ * @param {Number} max  - Highest Number in Range
+ * @returns Random Number between the range of min - max
+ */</span>
+<span class="token keyword">function</span> <span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token parameter">min<span class="token punctuation">,</span>max</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">*</span>Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>max<span class="token operator">-</span>min<span class="token punctuation">)</span> <span class="token operator">+</span> min<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>Here we are creating a function that would return a random number between two arguments. This way we can generate a random number between a range of numbers, say 1-10 and it would give a random number when invoked.</p>
+<h4 class="mume-header" id="random-decimal-number-generator">Random Decimal Number Generator</h4>
+
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">/**
+ * @function randomNumberDecimal Number
+ * @returns Random Decimal number fixed to 4 decimal places. 
+ */</span>
+<span class="token keyword">function</span> <span class="token function">randomNumberDecimal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">+</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toPrecision</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>Here we are ensuring that the return value is an integer(number) by using the ternary <code>+</code> symbol. You can try this in the console:</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token string">&apos;10&apos;</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment">// &apos;&apos;10&apos;&apos;</span>
+<span class="token keyword">typeof</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment">//&quot;string&quot;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token operator">+</span>a
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token comment">// 10 </span>
+<span class="token keyword">typeof</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token comment">//&quot;number&quot;</span>
+</pre><p>Next because we want to for a couple of reasons to curtail the amount of decimal numbers generated, so we fix it to 4 decimal places. Which is sufficiently long to be random and small enough that it wouldn&apos;t take up extra memory when computing.</p>
+<h4 class="mume-header" id="convert-to-radians">Convert to Radians</h4>
+
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">/**
+ * @function convertRadians
+ * @param {Number} degrees in Decimal
+ * @returns Degrees in Radians
+ */</span>
+<span class="token keyword">function</span> <span class="token function">convertRadians</span><span class="token punctuation">(</span><span class="token parameter">degrees</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">+</span><span class="token punctuation">(</span>degrees <span class="token operator">/</span> <span class="token number">180</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>Javascript likes radians, as it turns out. <sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>. This will save a lot of unnecessary math overhead when we start making the ship rotate clockwise and counter-clockwise.</p>
+<h4 class="mume-header" id="working-out-the-distance-between-objects">Working out the Distance between Objects</h4>
+
+<p>These two functions carry out a similar purpose to each other. The long and short of it is we will be working out the distance between two points using cartesian geometry.<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">/**
+ * @function distanceBetweenPoints
+ * @description
+ * Takes the cartesian distance between two points A(x,y) and B(x,y) 
+ * 
+ * @param {Number} x1 - X - Co-ordinate of the Primary Object
+ * @param {Number} y1 - Y - Co-ordinate of the Primary Object
+ * @param {Number} x2 - X - Co-ordinate of the Secondary Object
+ * @param {Number} y2 - Y - Co-ordinate of the Secondary Object
+ * @returns Distance in Pixels
+ * 
+ */</span>
+<span class="token keyword">function</span> <span class="token function">distanceBetweenPoints</span><span class="token punctuation">(</span><span class="token parameter">x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x2 <span class="token operator">-</span> x1<span class="token punctuation">)</span><span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token punctuation">(</span>y2 <span class="token operator">-</span> y1<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>The next function takes the same principles and apply it to circles <sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup></p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">/**
+ * @function distanceBetweenCircles
+ * @param {Number} x1 - X - Co-ordinate of the Primary Object
+ * @param {Number} y1 - Y - Co-ordinate of the Primary Object
+ * @param {Number} r2 - R - Co-ordinate of the radius of the Primary Object 
+ * @param {Number} x2 - X - Co-ordinate of the Secondary Object
+ * @param {Number} y2 - Y - Co-ordinate of the Secondary Object
+ * @param {Number} r2 - R - Co-ordinate of the radius of the second Object 
+ * @returns 
+ * Returns the distance between two circles 
+ */</span>   
+<span class="token keyword">function</span> <span class="token function">distanceBetweenCircles</span><span class="token punctuation">(</span><span class="token parameter">x1<span class="token punctuation">,</span>y1<span class="token punctuation">,</span>r1<span class="token punctuation">,</span>x2<span class="token punctuation">,</span>y2<span class="token punctuation">,</span>r2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x2 <span class="token operator">-</span> x1<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span> <span class="token operator">+</span> <span class="token punctuation">(</span>y2<span class="token operator">-</span>y1<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token punctuation">(</span>r2<span class="token operator">+</span>r1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>Now that is the Global Scope populated with the few functions that we will be needing elsewhere in the script.</p>
+<h2 class="mume-header" id="setting-up-the-game-objects-class">Setting up the Game Objects Class</h2>
+
+<p>So in order to keep with a strictly Object Orientated Approach to making this Asteroids game, we need to create some parent classes for our objects.</p>
+<p>The best way to approach this is by breaking up the objects that we will be having into common properties and what is exclusive to itself.</p>
+<p>Lets break this out:</p>
+<ol>
+<li>We need to keep a single point of truth for a lot of the game variables that we would be using repetitively throughout the script. There would also be methods(functions) that would be solely specific to the game and not related to either the spaceship or asteroids. If anything they should be able to access this as a reference.<br>
+<a href="#class-gameconstant">see class GameConstants</a>.</li>
+<li>We need to have a shared object that would hold similar properties that would be between both the spaceship and the asteroids. From this we can then build out each object<br>
+<a href="#class-gameobjects">see class GameObject</a></li>
+<li>Building a object literal for the spaceship and asteroids respectively. Each would have methods that would be relevant to them. keeping the inheritance of these objects separate.<br>
+<a href="#class-shipobject">see class ShipObject</a><br>
+<a href="#class-astroobject">see class AstroObject</a></li>
+</ol>
+<h3 class="mume-header" id="class-gameconstant">class GameConstant</h3>
+
+<p>First up we are going to create a parent object for all the game constants that we would be using. The original tutorial has these <em>cluttering</em> the global scope which makes it awfully clumbersome. By moving these to an object we would be making it easier to reference and manage the constants in the game.</p>
+<p>First up we would need to get the width and height of the canvas and have this automatically update everytime the window is resized. This keeps the canvas elements inside the canvas respective of the viewport as it changes sizes. I would say trust me, by getting this out early doors we can work with a more pixel sharp and responsive canvas. Which is to the benefit of the greater good.</p>
+<p>We would be using the <code>getter</code> accessor method <sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup> if you are unfamiliar with it, this is a great introduction.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">GameConstants</span><span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">/**
+        * @this this._width - Private width variable that would store the size of the window width
+        */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_width <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/**
+         * @this this._height - Private Height variable that would store the height of the window
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_height<span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">/**
+         * Calls the getCanvasDimensions method
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getCanvasDimensions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//Getting the Width and Height as soon as the Window loads</span>
+        window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">&apos;load&apos;</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getCanvasDimensions</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token comment">//As the window is resized we are getting the new Canvas Dimensions</span>
+        window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">&apos;resize&apos;</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getCanvasDimensions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+       
+    <span class="token punctuation">}</span>
+    <span class="token function">getCanvasDimensions</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Width is determined by the css value for the viewport width this is then respected by the device pixel ratio. This is then used to set the canvas.width value</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_width <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">Number</span><span class="token punctuation">(</span><span class="token function">getComputedStyle</span><span class="token punctuation">(</span>canvas<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getPropertyValue</span><span class="token punctuation">(</span><span class="token string">&apos;width&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span>devicePixelRatio<span class="token punctuation">)</span> <span class="token operator">*</span> devicePixelRatio<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//Setting the canvas width </span>
+        canvas<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_width
+        
+        <span class="token comment">// height is determined by the css value for the viewport height this is then respected by the device pixel ratio. This is then used to set the canvas.height value</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_height <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">Number</span><span class="token punctuation">(</span><span class="token function">getComputedStyle</span><span class="token punctuation">(</span>canvas<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getPropertyValue</span><span class="token punctuation">(</span><span class="token string">&apos;height&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span>devicePixelRatio<span class="token punctuation">)</span> <span class="token operator">*</span> devicePixelRatio<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//Setting the canvas height</span>
+        canvas<span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_height
+        
+    <span class="token punctuation">}</span>
+    <span class="token keyword">get</span> <span class="token function">width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//This sets the width to the private _width value</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_width
+        
+    <span class="token punctuation">}</span>
+    <span class="token keyword">get</span> <span class="token function">height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//This sets the height to the private _height value</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_height
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</pre><p>There is a couple of things happening here that is worth commenting on. First we set internal <code>this</code> properties for the width and height. The purpose being is that these update as the window loads up, so it doesn&apos;t have a <code>null</code> value. We place a method call within the constructor function as we need to establish that the method call <code>getCanvasDimensions</code> is called when it the object is created. Secondly we place event listeners again within the constructor to re-obtain the new width and height value as the window resizes.</p>
+<p>We then use the <code>get</code> accessor function which lets us <em>get the new value</em> when it is called. This is all done in the name of responsiveness. We will see exactly how it looks soon once we start drawing the spaceship.</p>
+<p>Next we are going to be instantiating this new object literal to something that we can now reference, and that is what we are calling it.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">let</span> reference <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GameConstants</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p><img src="imgs/console-log-ReferenceObj.png"><br>
+This looks right, now go ahead and resize the window and <code>console.log(reference.width)</code> and <code>console.log(reference.height)</code> respectively. Notice how it presents the new sizes as the window changes. (This was a huge win for me, three canvas projects later and I finally fix this bug! &#x1F4AA;)</p>
+<p>As we begin to develop the game out we will be adding to this Object Class with additional properties.</p>
+<p>Now since we are using <code>requestAnimationFrame()</code> API we need to understand something about it. It is a magical recursive loop, that doesn&apos;t break your computer. But as it does its looping it does so at an inconsistent rate, this is often client-machine dependant. So in a single second, 1000ms the recursive loop will go over itself anywhere between 1000-100 times in a second. Each time it does it re-draws the <em>scene</em> or <em>frame</em>. Each <em>frame</em> is a snapshot of the programs recalculations. Doing it this fast can send a lot of the calculations of whack, as each scene is being updated it recalculates(re-executes) all the object values to show their new position on each frame. To balance this out we set a property to indicate the number of frames to execute each second. This gives our animation a steady frame rate, of each frame being executed 1/60th of a second or 16.6ms. So that&apos;s one new frame every 16.6ms, which is easier for the calculations which we will be doing. ( yes this is a math warning...what you thought this would be easy, &#x1F415;-please)</p>
+<p>So in the <code>class GameConstants</code> constructor function add this with the other <code>this.</code> properties.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript">        <span class="token comment">/**@this this.FPS - Frames per Second */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span>
+</pre><h3 class="mume-header" id="class-gameobject">class GameObject</h3>
+
+<p>This is a shared parent object literal class that would contain the most basic shared properties between the spaceship and the asteroids. This is straightforward:</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">GameObject</span><span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * 
+     * @param {Number} x - Position of Object on X - Axis 
+     * @param {Number} y - Position of Object on Y - Axis
+     * @param {Number} r - Radius of the Object
+     * @param {Number} a - Angle of the Object (in deg)
+     */</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r<span class="token punctuation">,</span>a</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">/**
+         * @this this.x -  Position of the Object on the X - Axis
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/**
+         * @this this.y -  Position of the Object on the Y - Axis
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/**
+         * @this this.r -  Radius of the Object
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/**
+         * @this this.a - Angle of the Object - converted to Radians
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token function">convertRadians</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//Converted to Radians</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Really this would save us repeating these properties as we create the spaceship and the asteroids.</p>
+<h3 class="mume-header" id="class-shipobject">class ShipObject</h3>
+
+<p>Right now lets do something fun.  For this class we will be building up over time. We will be adding new properties to it as we make the ship more complex.</p>
+<p>We will be looking to make the following spaceship.<br>
+<img src="imgs/Spaceship_example.png">.</p>
+<p>To do this lets first extend the <code>GameObject</code> class to start incorporating some of the properties that we need for building our spaceship.</p>
+<h4 class="mume-header" id="setting-up-the-object-literal">Setting up the Object Literal</h4>
+
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">ShipObject</span> <span class="token keyword">extends</span> <span class="token class-name">GameObject</span><span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r<span class="token punctuation">,</span>a<span class="token punctuation">,</span>rot<span class="token punctuation">,</span>thrusting<span class="token punctuation">,</span>thrust</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r<span class="token punctuation">,</span>a<span class="token punctuation">)</span><span class="token comment">//Inheriting the Properties from the Parent Object</span>
+     
+        <span class="token comment">/**
+         * @this this.rot - Ship can only rotate around 360deg of a circle  converted to Radians
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>rot <span class="token operator">=</span> <span class="token function">convertRadians</span><span class="token punctuation">(</span>rot<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Converted it into Radians</span>
+     
+        <span class="token comment">/**
+         * @this this.thrusting - Boolean Flag! True when the ship trust is active
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>thrusting <span class="token operator">=</span> <span class="token function">Boolean</span><span class="token punctuation">(</span>thrusting<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     
+        <span class="token comment">/** 
+         * @this this.thrust - Provides a vector for the ship when travelling
+        */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>thrust <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token operator">...</span>thrust<span class="token punctuation">}</span><span class="token punctuation">;</span>
+     
+        <span class="token comment">/**
+         * @this this.SHIP_SIZE 
+         * @description Height of the Ship in px&apos;s - Same as the Radius
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">SHIP_SIZE</span> <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     
+        <span class="token comment">/**
+         * @this this.Friction 
+         * @description Adds a Friction co-efficient to the movement of the ship:Friction in Space (0 = no friction, 1 = 100% friction)
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">FRICTION</span> <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        
+        <span class="token comment">/**
+         * @this this.SHIP_THRUST 
+         * @description Acceleration of the Ship, in px/sec^2
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">SHIP_THRUST</span> <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// acceleration of the Ship, px/sec^2</span>
+     
+        <span class="token comment">/**
+         * @this this.TURN_DEG
+         * @description This is the turning angle in deg/sec. 
+         */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">TURN_DEG</span> <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span><span class="token number">360</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Turns in deg/sec</span>
+
+
+    <span class="token punctuation">}</span>
+    <span class="token comment">//Methods Go Here</span>
+<span class="token punctuation">}</span>
+</pre><p>Quick note: I have kept the <strong>constants</strong> that the ship would be using like typed in Uppercase, which is just to make it easier to know what is a variable and a constant.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">SHIP_SIZE</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">FRICTION</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">SHIP_THRUST</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">TURN_DEG</span>
+</pre><p>To instantiate the object we will be calling it using:</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">//On the Global scope for the being</span>
+<span class="token keyword">let</span> spaceship <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ShipObject</span><span class="token punctuation">(</span>
+    reference<span class="token punctuation">.</span>width <span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span>
+    reference<span class="token punctuation">.</span>height<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token number">90</span><span class="token punctuation">,</span>
+    <span class="token number">360</span><span class="token punctuation">,</span>
+    <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>x<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span>y<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>This should produce the following when <code>console.log(ship)</code> (x &amp; y values will be somewhat different)-(it was originally called <code>ship</code>&#x1F6A2;, this got changed to <code>spaceship</code>&#x1F680;)<br>
+<img src="imgs/console.log(ship).png" alt></p>
+<p>Awesome, we have gotten our object made up with little to no complications what-so-ever. &#x1F611;</p>
+<h4 class="mume-header" id="draw-method">Draw method</h4>
+
+<p>Now lets draw this spaceship on the screen.</p>
+<p>First we would want to create a draw method on the ShipObject&apos;s prototype chain.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">ShipObject</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token comment">//ctx styles</span>
+       ctx<span class="token punctuation">.</span>strokeStyle <span class="token operator">=</span> <span class="token string">&apos;white&apos;</span>
+       ctx<span class="token punctuation">.</span>lineWidth <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+       <span class="token comment">//The outer Triangle</span>
+       ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       ctx<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>
+           <span class="token comment">//Nose of the spaceship</span>
+
+            <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">+</span> <span class="token number">4</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">-</span> <span class="token number">4</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">lineTo</span><span class="token punctuation">(</span> <span class="token comment">// rear left</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">-</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">lineTo</span><span class="token punctuation">(</span> <span class="token comment">// rear right</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">-</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        ctx<span class="token punctuation">.</span><span class="token function">closePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Finishes of the Outer Triangle</span>
+        ctx<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//Drawing the Cockpit</span>
+        ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">&apos;red&apos;</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>lineWidth <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span> <span class="token comment">// top of the cockpit</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">SHIP_SIZE</span><span class="token punctuation">)</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">SHIP_SIZE</span><span class="token punctuation">)</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">lineTo</span><span class="token punctuation">(</span> <span class="token comment">// rear left of the cockpit</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">+</span>  <span class="token number">0.5</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">0.5</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">lineTo</span><span class="token punctuation">(</span> <span class="token comment">// rear right of the cockpit</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">-</span>  <span class="token number">0.5</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0.5</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Fill in the Shape</span>
+        ctx<span class="token punctuation">.</span><span class="token function">closePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Finishes of the Triangle</span>
+        ctx<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//More to be added....</span>
+    <span class="token punctuation">}</span>
+
+</pre><p>Now to have the ship drawn on the screen we would invoke this method within the <a href="#setting-up-the-animation-loop">gameAnimation</a> Loop.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">//Game Animation Loop</span>
+<span class="token keyword">function</span> <span class="token function">gameAnimation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">&apos;black&apos;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">fillRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>reference<span class="token punctuation">.</span>width<span class="token punctuation">,</span>reference<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//Drawing the &#x1F680;</span>
+    spaceship<span class="token punctuation">.</span><span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//Request animation frame</span>
+    <span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span>gameAnimation<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">gameAnimation</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>You should have an object now appear on the canvas that should look very similar to this image of the spaceship.<br>
+<img src="imgs/Spaceship_example.png" alt>&#x1F44D;</p>
+<h4 class="mume-header" id="making-the-ship-move">Making the ship move</h4>
+
+<p>Now we want to make the ship move about. If you noticed we created a <code>thrusting</code> flag, which just records if the ship&apos;s thrust is On or Off. We can use these flags to determine when to switch on and off the thruster, which would be seen as:<br>
+We would also need to rotate the ship clockwise and counter-clockwise. This would be controlled by keyboard inputs which we would make up second.<br>
+<img src="imgs/Spaceship_example-thrusting.png"></p>
+<p><img src="imgs/Spaceship_example-rotating.png"><br>
+But first lets make the functionality for the spaceship to fly around space.<br>
+Back in the <code>draw()</code> method we will add this block of code:</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">ShipObject</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">...</span> 
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>thrusting<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//Add Thrust vector </span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>thrust<span class="token punctuation">.</span>x <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">SHIP_THRUST</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">/</span> reference<span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">**</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>thrust<span class="token punctuation">.</span>y <span class="token operator">-=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">SHIP_THRUST</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">/</span> reference<span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">**</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">2</span> <span class="token punctuation">;</span>
+            <span class="token comment">//Draw thrust animation</span>
+            ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span>strokeStyle <span class="token operator">=</span> <span class="token string">&quot;yellow&quot;</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">&quot;red&quot;</span>
+            ctx<span class="token punctuation">.</span>lineWidth <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span> <span class="token comment">// rear center behind the spaceship</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token number">4</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token number">4</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">lineTo</span><span class="token punctuation">(</span> <span class="token comment">// rear left</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">+</span>  <span class="token number">0.75</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">0.75</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">lineTo</span><span class="token punctuation">(</span> <span class="token comment">// rear right</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">-</span>  <span class="token number">0.75</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0.75</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Fill in the Shape</span>
+            ctx<span class="token punctuation">.</span><span class="token function">closePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Finishes of the Triangle</span>
+            ctx<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token comment">//Applying Friction to slow down the spaceship when Not thrusting</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>thrusting<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>thrust<span class="token punctuation">.</span>x <span class="token operator">-=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">FRICTION</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>thrust<span class="token punctuation">.</span>x <span class="token operator">/</span>reference<span class="token punctuation">.</span><span class="token constant">FPS</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>thrust<span class="token punctuation">.</span>y <span class="token operator">-=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token constant">FRICTION</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>thrust<span class="token punctuation">.</span>y <span class="token operator">/</span>reference<span class="token punctuation">.</span><span class="token constant">FPS</span>
+            
+        <span class="token punctuation">}</span>
+        <span class="token comment">//Rotate spaceship</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>rot
+        <span class="token comment">//Move the spaceship</span>
+                    
+        <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>thrust<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>thrust<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+
+        <span class="token comment">//Handle screen edges</span>
+</pre><p>Now lets get the event listeners setup. In the <code>GameConstant</code> literal we will create two methods, one to handle the key-down press event and one as we release the key or the key-up press event. As we press down we will active the thrust and rotate the ship, and as we release we want to stop the thruster and rotation, else they would just continue to be on.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">GameConstants</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">keyDown</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            
+            <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;ArrowUp&apos;</span> <span class="token operator">||</span> event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;w&apos;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment">//Start Thrusting</span>
+                spaceship<span class="token punctuation">.</span>thrusting <span class="token operator">=</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;ArrowRight&apos;</span> <span class="token operator">||</span> event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;a&apos;</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment">//Rotate Right</span>
+                spaceship<span class="token punctuation">.</span>rot <span class="token operator">=</span> <span class="token function">convertRadians</span><span class="token punctuation">(</span>spaceship<span class="token punctuation">.</span><span class="token constant">TURN_DEG</span><span class="token punctuation">)</span> <span class="token operator">/</span> reference<span class="token punctuation">.</span><span class="token constant">FPS</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;ArrowLeft&apos;</span> <span class="token operator">||</span> event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;d&apos;</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment">//Rotate Left</span>
+                spaceship<span class="token punctuation">.</span>rot <span class="token operator">=</span> <span class="token operator">-</span><span class="token function">convertRadians</span><span class="token punctuation">(</span>spaceship<span class="token punctuation">.</span><span class="token constant">TURN_DEG</span><span class="token punctuation">)</span> <span class="token operator">/</span> reference<span class="token punctuation">.</span><span class="token constant">FPS</span>
+                
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">keyUp</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;ArrowUp&apos;</span> <span class="token operator">||</span> event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;w&apos;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment">//Stop Thrusting</span>
+                spaceship<span class="token punctuation">.</span>thrusting <span class="token operator">=</span> <span class="token boolean">false</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;ArrowRight&apos;</span> <span class="token operator">||</span> event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;a&apos;</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment">//Stop Rotating Right</span>
+                spaceship<span class="token punctuation">.</span>rot <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;ArrowLeft&apos;</span> <span class="token operator">||</span> event<span class="token punctuation">.</span>key <span class="token operator">===</span> <span class="token string">&apos;d&apos;</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                spaceship<span class="token punctuation">.</span>rot <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+</pre><p>To add these event listeners we do so just above the <code>gameAnimation</code> loop at the bottom of the script.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript">document<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">&apos;keydown&apos;</span><span class="token punctuation">,</span>reference<span class="token punctuation">.</span>keyDown<span class="token punctuation">)</span>
+document<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">&apos;keyup&apos;</span><span class="token punctuation">,</span>reference<span class="token punctuation">.</span>keyUp<span class="token punctuation">)</span>
+</pre><p>Now you should have your spaceship moving and zooming about that screen &#x1F60A;.</p>
+<h4 class="mume-header" id="handle-screen-edges">Handle screen edges</h4>
+
+<p>But we have a problem as the ship moves off the screen it doesn&apos;t appear on the opposite side of where it exited. This is a problem that can be fixed by adding a method on the <code>GameConstant</code> Object that would handle for screen edges.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">GameConstants</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">screenEdges</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>x <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">-</span> obj<span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            obj<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>width <span class="token operator">+</span> obj<span class="token punctuation">.</span>r
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>x <span class="token operator">&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>width <span class="token operator">+</span> obj<span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            obj<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">-</span> obj<span class="token punctuation">.</span>r
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>y <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">-</span> obj<span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            obj<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>height <span class="token operator">+</span> obj<span class="token punctuation">.</span>r
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>y <span class="token operator">&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>height <span class="token operator">+</span> obj<span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            obj<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">-</span> obj<span class="token punctuation">.</span>r
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>  
+</pre><p>Here we will be passing in different objects like the spaceship and asteroids and as such we will be calling on this function a lot.</p>
+<p>Back in the <code>draw()</code> method we have setup we will apply this statement at the bottom</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript">        <span class="token comment">//Handle screen edges</span>
+        reference<span class="token punctuation">.</span><span class="token function">screenEdges</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+
+</pre><p>Now you the spaceship should reappear on the opposite side of where it entered. Now we are flying &#x1F680;.</p>
+<p>The spaceship object is pretty complete for now, we will come back and add other functionality like; lasers and collision detection etc.</p>
+<h3 class="mume-header" id="class-astroobject">class AstroObject</h3>
+
+<p>There is a lot going on with the Asteroids, more than the spaceship. Firstly we need to create an asteroid field, where each asteroid would randomly appear on the screen and have their own respective vectors which lets them follow a path across each frame. They also should be able to collide with each other and ricochet of each other. We would also need to be able to destroy them completely and replace them with smaller fragments.</p>
+<p>But before we do anything that remotely complicated, we need to create our Asteroid Object literal. This literal will describe the properties that we would be using for each asteroid.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">AsteroidObject</span> <span class="token keyword">extends</span> <span class="token class-name">GameObject</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r<span class="token punctuation">,</span>asteroidIndex</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r<span class="token punctuation">)</span>
+        <span class="token comment">/**@this this.a - returns a random angle in radians */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> <span class="token number">2</span>
+        
+        <span class="token comment">/**@this this.vX - random Velocity on the x-axis  */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>vX <span class="token operator">=</span><span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token operator">/</span>reference<span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token function">randomNumberDecimal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token number">0.5</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        
+        <span class="token comment">/**@this this.vY - random Velocity on the y-axis  */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>vY <span class="token operator">=</span> <span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token operator">/</span>reference<span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token function">randomNumberDecimal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token number">0.5</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        
+        <span class="token comment">/**@this this.vertices - Random number of vertices for the polygon to be generated */</span>
+        
+        <span class="token keyword">this</span><span class="token punctuation">.</span>vertices <span class="token operator">=</span>Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment">//Each asteroid has a random number of vertices</span>
+        
+        <span class="token comment">/**@this this.jaggedness - random determination on the amount of jaggedness on the asteroid */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>jaggedness <span class="token operator">=</span> <span class="token function">randomNumberDecimal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// 0 = none 1 = 100</span>
+        
+        <span class="token comment">/**@this this.offsets - Array of positions for the dimensions of the polygon */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>offsets <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        
+        <span class="token comment">/**@this this.asteroidIndex - Asteroid Index position in the Array */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>asteroidIndex <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>asteroidIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Here we are going to be setting the asteroid x,y and radius separately, this way we can give them random values at run-time. We will come back to this. Next we are setting the <code>vX</code> &amp; <code>vY</code> using a random number that would depending on the logic condition would either appear to be a positive integer or a negative integer.<br>
+Because we are wanting the asteroids are going to be jaggy and random polygons we need to have a few extra values to make such predictions.</p>
+<h4 class="mume-header" id="creating-asteroid-field">Creating Asteroid Field</h4>
+
+<p>Now lets create an asteroid field. Since this is a feature of the game, we would be placing this next method on the <code>GameObjects</code> prototype chain.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">GameConstants</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">createAsteroidField</span><span class="token punctuation">(</span><span class="token parameter">numberOfAsteroids</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">/**
+            * @function createNewAsteroid
+            * @param {Number} x 
+            * @param {Number} y 
+            * @param {Number} r 
+            * @description generates a new Asteroid Object 
+            */</span>
+        <span class="token keyword">function</span> <span class="token function">createNewAsteroid</span><span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">let</span> asteroid <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AsteroidObject</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//Setting the values for the asteroids jaggedness</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> offset <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> offset <span class="token operator">&lt;</span> asteroid<span class="token punctuation">.</span>vertices<span class="token punctuation">;</span> offset<span class="token operator">++</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                asteroid<span class="token punctuation">.</span>offsets<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>
+                    Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> asteroid<span class="token punctuation">.</span>jaggedness <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">-</span> asteroid<span class="token punctuation">.</span>jaggedness
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> asteroid
+        <span class="token punctuation">}</span>
+        
+        <span class="token comment">//clear the existing array</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>asteroidField <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//creating placeholders</span>
+        <span class="token keyword">let</span> x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r
+
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> index<span class="token operator">&lt;</span> numberOfAsteroids<span class="token punctuation">;</span> <span class="token operator">++</span>index<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            x <span class="token operator">=</span> <span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>width<span class="token punctuation">)</span>
+            y <span class="token operator">=</span> <span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>height<span class="token punctuation">)</span>
+            r <span class="token operator">=</span><span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//Giving the asteroid a Label</span>
+            i <span class="token operator">=</span> index
+            
+            <span class="token comment">//Creating a buffer zone around the ship to prevent the asteroids randomly spawning on the ship</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">distanceBetweenPoints</span><span class="token punctuation">(</span>spaceship<span class="token punctuation">.</span>x<span class="token punctuation">,</span>spaceship<span class="token punctuation">.</span>y<span class="token punctuation">,</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> spaceship<span class="token punctuation">.</span>r <span class="token operator">*</span> <span class="token number">5</span> <span class="token operator">+</span> spaceship<span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                x <span class="token operator">=</span> <span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>width<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>spaceship<span class="token punctuation">.</span>x <span class="token operator">+</span> spaceship<span class="token punctuation">.</span>r <span class="token operator">+</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                y <span class="token operator">=</span> <span class="token function">randomNumber</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>height<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>spaceship<span class="token punctuation">.</span>y <span class="token operator">+</span> spaceship<span class="token punctuation">.</span>r <span class="token operator">+</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>asteroidField<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">createNewAsteroid</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>asteroidField
+    <span class="token punctuation">}</span>
+</pre><p>This method will create a number of asteroids from a parameter which we can change throughout the script. This will come in handy when we want to create more asteroids.<br>
+We are also creating a buffer zone around the ship where if the asteroid spawns near a radial distance to the ship, it would be relocated to somewhere else in space and kept a distance away.<br>
+We then push each newly created asteroid object to the <code>asteroidField</code> which is an array of asteroid objects.<br>
+To call this method we place it for the time being on the global scope.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">//placed ideally just above the Animation Loop</span>
+reference<span class="token punctuation">.</span><span class="token function">createAsteroidField</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+</pre><h4 class="mume-header" id="draw-method-1">Draw Method</h4>
+
+<p>The asteroids themselves each has their own draw method. This method is on the <code>AsteroidObject</code> prototype chain. Here we are instructing it to draw a polygon based on the values in the <code>asteriod.offset</code> array. This gives each asteroid their own unique shape. Kinda like snowflakes.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">AsteroidObject</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//Draw Asteroids</span>
+            ctx<span class="token punctuation">.</span>strokeStyle <span class="token operator">=</span> <span class="token string">&apos;#BADA55&apos;</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span>lineWidth <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">&apos;transparent&apos;</span><span class="token punctuation">;</span>
+            <span class="token comment">//draw a path</span>
+            ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                ctx<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>offsets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>offsets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span> <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+            <span class="token comment">//draw the polygon and jaggedness for each asteroid</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> polygon <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> polygon <span class="token operator">&lt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>vertices<span class="token punctuation">;</span> polygon<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                ctx<span class="token punctuation">.</span><span class="token function">lineTo</span><span class="token punctuation">(</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>offsets<span class="token punctuation">[</span>polygon<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span> <span class="token operator">*</span>  Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">+</span> polygon <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">/</span> <span class="token keyword">this</span><span class="token punctuation">.</span>vertices<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>offsets<span class="token punctuation">[</span>polygon<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token operator">*</span>  Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">+</span> polygon <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">/</span> <span class="token keyword">this</span><span class="token punctuation">.</span>vertices<span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">closePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">//handle collision detection</span>
+            
+            <span class="token comment">//move asteroid</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>vX
+            <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>vY
+            
+            
+            <span class="token comment">//handle edge of screen</span>
+            reference<span class="token punctuation">.</span><span class="token function">screenEdges</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+</pre><p>To call this function in the Animation Loop we will add the following <code>Array.forEach()</code> loop.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">//Global Scope-At the Bottom of the Script</span>
+<span class="token keyword">function</span> <span class="token function">gameAnimation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">&apos;black&apos;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">fillRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>reference<span class="token punctuation">.</span>width<span class="token punctuation">,</span>reference<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    spaceship<span class="token punctuation">.</span><span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//Drawing each asteroid on the screen</span>
+    reference<span class="token punctuation">.</span>asteroidField<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">asteroid</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+        asteroid<span class="token punctuation">.</span><span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+    <span class="token comment">//Request animation frame</span>
+    <span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span>gameAnimation<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</pre><p>Now you should have nice asteroids, all floating about the screen &#x1F60D;</p>
+<img src="imgs/asteroid-example-finalRender.png" alt>
+<p>Now we can start building a game.</p>
+<h2 class="mume-header" id="building-out-the-game">Building out the Game</h2>
+
+<p>Here we are going to be adding more functionality to the game, these are things that I thought: that would be cool to have. And so it has naturally grown arms and legs.<br>
+The things we would be adding to this would be:</p>
+<ol>
+<li>
+<p>collision detection between:</p>
+<ul>
+<li>ship and asteroid: where the ship is blown up. We would have an exploding animation. It should decrease the game lives counter by one.<br>
+-asteroid and asteroid: where each asteroid if it collides with another it should ricochet off each other and go in different directions.</li>
+</ul>
+</li>
+<li>
+<p>Lasers</p>
+<ul>
+<li>shooting and blowing up each asteroid into smaller pieces. Keeping a score as each asteroid is breaking up. If the pieces break into smaller fragments, once they reach a certain size they disappear.</li>
+</ul>
+</li>
+<li>
+<p>Keep a score and a Lives counter. Game ends when the player runs out of lives. Levels increase if the player is still alive and their is no more asteroids left.</p>
+</li>
+</ol>
+<p>(Ill add more here as we go, something about it growing arms and legs)</p>
+<h3 class="mume-header" id="collision-detection">Collision Detection</h3>
+
+<p>Remember the <a href="#working-out-the-distance-between-objects"><code>distanceBetweenPoints()</code></a> and <a href="#working-out-the-distance-between-objects"><code>distanceBetweenCircles()</code></a> that we created in the global space. This is where we would utilize it.</p>
+<h4 class="mume-header" id="asteroid">Asteroid</h4>
+
+<p>To see if a collision has happened we are checking if the distance between two asteroids is less than the radius of the asteroid about to collide. If it does we will change the vector values for both the asteroids in question.<br>
+In the <code>AsteroidObject</code> methods chain we will add this code block that pretty much does that with little <em>Jank</em>.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">AsteroidObject</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">asteroid2asteroidCollision</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">let</span> currentAsteroid <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        reference<span class="token punctuation">.</span>asteroidField<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">otherAsteroid</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>currentAsteroid <span class="token operator">!=</span> otherAsteroid<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">distanceBetweenCircles</span><span class="token punctuation">(</span>currentAsteroid<span class="token punctuation">.</span>x<span class="token punctuation">,</span>currentAsteroid<span class="token punctuation">.</span>y<span class="token punctuation">,</span>currentAsteroid<span class="token punctuation">.</span>r<span class="token punctuation">,</span>otherAsteroid<span class="token punctuation">.</span>x<span class="token punctuation">,</span>otherAsteroid<span class="token punctuation">.</span>y<span class="token punctuation">,</span>otherAsteroid<span class="token punctuation">.</span>r<span class="token punctuation">)</span> <span class="token operator">&lt;</span> currentAsteroid<span class="token punctuation">.</span>r <span class="token operator">+</span> currentAsteroid<span class="token punctuation">.</span>x <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token comment">//Make the asteroids &apos;softly&apos; ricochet off each other</span>
+                    <span class="token comment">//There has been many different attempts at getting this right, this is by far the best attempt at getting the asteroids to move off and change direction and their velocity that produces the least amount of Janking</span>
+                        
+                        currentAsteroid<span class="token punctuation">.</span>vX <span class="token operator">=</span> currentAsteroid<span class="token punctuation">.</span>vX<span class="token operator">/</span><span class="token punctuation">(</span> <span class="token punctuation">(</span>reference<span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token operator">-</span>currentAsteroid<span class="token punctuation">.</span>a<span class="token punctuation">)</span> 
+                        otherAsteroid<span class="token punctuation">.</span>vX <span class="token operator">=</span> otherAsteroid<span class="token punctuation">.</span>vX<span class="token operator">/</span> <span class="token punctuation">(</span>reference<span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token operator">-</span>otherAsteroid<span class="token punctuation">.</span>a<span class="token punctuation">)</span> 
+
+                        currentAsteroid<span class="token punctuation">.</span>vY <span class="token operator">=</span> currentAsteroid<span class="token punctuation">.</span>vY<span class="token operator">/</span> <span class="token punctuation">(</span>reference<span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token operator">-</span>currentAsteroid<span class="token punctuation">.</span>a<span class="token punctuation">)</span>  
+                        otherAsteroid<span class="token punctuation">.</span>vY <span class="token operator">=</span> otherAsteroid<span class="token punctuation">.</span>vY<span class="token operator">/</span> <span class="token punctuation">(</span>reference<span class="token punctuation">.</span><span class="token constant">FPS</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token operator">-</span>otherAsteroid<span class="token punctuation">.</span>a<span class="token punctuation">)</span>
+                    <span class="token comment">//This was easy...&#x1F611;</span>
+
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><p>We are using the <code>forEach()</code> array iterator to check if the asteroid that is currently being drawn in that frame is not the same as every other asteroid.<br>
+We then check if the distance between the asteroids is less than the asteroid radius that is colliding with it , meaning that they are overlapping at the radial point of each asteroid. We are then changing the velocity of both asteroids respective of the framerate and their angles. We then switch between positive and negative integers depending on a random value.</p>
+<p>To instantiate this method every time the asteroid is drawn we place it within the <code>AsteroidObject.draw()</code> method.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">AsteroidObject</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">...</span> 
+        ctx<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       
+       <span class="token comment">//Handle collision Detection</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">asteroid2asteroidCollision</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">asteroid2shipCollision</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    
+
+        <span class="token comment">//move asteroid</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>vX
+        <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>vY
+        
+        <span class="token comment">//handle edge of screen</span>
+        reference<span class="token punctuation">.</span><span class="token function">screenEdges</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><p>To really test this new method it would be good to increase the number of asteroids in the asteroid field to something like 15<br>
+<code>reference.createAsteroidField(15)</code></p>
+<h4 class="mume-header" id="ship">Ship</h4>
+
+<p>To detect if the Ship has collided with an asteroid we will need to register a <code>spaceship.exploding</code> flag as true. For if the ship is exploding we would want to draw an explosion animation. Then reset the ship&apos;s position to the center of the screen. (and reduce the lives&apos;s count by one...-this is a problem atm)</p>
+<p>To detect the asteroid 2 ship collision we would apply this method to the <code>AsteroidObject</code> chain.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">AsteroidObject</span><span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">asteroid2shipCollision</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">distanceBetweenPoints</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>y<span class="token punctuation">,</span>spaceship<span class="token punctuation">.</span>x<span class="token punctuation">,</span>spaceship<span class="token punctuation">.</span>y<span class="token punctuation">)</span> <span class="token operator">&lt;</span> spaceship<span class="token punctuation">.</span>r <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>spaceship<span class="token punctuation">.</span>immune<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// register that the ship is exploding </span>
+            reference<span class="token punctuation">.</span>shipExploding <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>There is a few extra properties that had to be set to set this up. First in the <code>GameConstants</code> Object literal we put this flag in.</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">GameConstants</span><span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">...</span>
+        <span class="token comment">/**@this this.shipExploding - Registers a flag if the ship is exploding */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>shipExploding <span class="token operator">=</span> <span class="token boolean">false</span>
+</pre><pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">ShipObject</span><span class="token punctuation">{</span>
+    <span class="token comment">//constructor</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">/**@this this.immune - Immunity from Explosions Flag */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>immune <span class="token operator">=</span> <span class="token function">Boolean</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//methods </span>
+    <span class="token function">explodeShip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//Prevent the ship from moving</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>immune<span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token keyword">this</span><span class="token punctuation">.</span>thrust <span class="token operator">=</span> <span class="token punctuation">{</span>
+            x<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+            y<span class="token punctuation">:</span><span class="token number">0</span>
+        <span class="token punctuation">}</span><span class="token punctuation">}</span>
+
+        <span class="token comment">//Drawing the Explosion</span>
+        ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//Outermost circle - Dark Orange</span>
+        ctx<span class="token punctuation">.</span>strokeStyle <span class="token operator">=</span> <span class="token string">&apos;#db4200&apos;</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span><span class="token string">&apos;#db4200&apos;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">arc</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>y<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        ctx<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// n-1 circle - Orange</span>
+        ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>strokeStyle <span class="token operator">=</span> <span class="token string">&apos;#f26900&apos;</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span><span class="token string">&apos;#f26900&apos;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">arc</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>y<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">+</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// n-2 circle - Yellow</span>
+        ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>strokeStyle <span class="token operator">=</span> <span class="token string">&apos;#f29d00&apos;</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span><span class="token string">&apos;#f29d00&apos;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">arc</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>y<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>r <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</pre><p>This is the exploding animation function. We are basically instructing the <code>ctx</code> render engine to create three concentric circles to give the appearance of an explosion. Now we are going to set this to be active if the ship is registered as being <em>exploding</em><br>
+Once it explodes after a certain time limit we want it to respawn at the center of the screen. (also I would ideally like it to decrease a live but that is still proving tricky, mind you something could be said about the power of procrastination, if it wasn&apos;t for this problem and some others that has managed to of been resolved, like the janking collisions between asteroids I mean it was ugly for a while. And the resizing the screen, I cant tell you how chuffed I am still at this. So I still hold out hope yet, that by the time we get to that, I&apos;ve of figured it out by then &#x1F64A; )<br>
+Once the spaceship explodes we want to give it some sort of immunity from being destroyed for a period of time to let the user get somewhere safe before they are susceptible to being destroyed by an asteroid.</p>
+<p>So lets add a change to the spaceship, If it is immune it turns golden &gt;?</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">ShipObject</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//At the top</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>immune<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                ctx<span class="token punctuation">.</span>strokeStyle <span class="token operator">=</span> <span class="token string">&quot;gold&quot;</span><span class="token punctuation">;</span>
+                ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">&quot;gold&quot;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            ctx<span class="token punctuation">.</span>strokeStyle <span class="token operator">=</span> <span class="token string">&quot;white&quot;</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">&quot;red&quot;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//Delete line 390</span>
+        <span class="token operator">...</span>
+        <span class="token comment">//Drawing the Cockpit</span>
+            ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// ctx.fillStyle = &apos;red&apos;;&lt;---Delete this line</span>
+    <span class="token punctuation">}</span>
+</pre><p>This method is placed on the <code>GamesConstants</code>  methods chain,</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">GameConstants</span><span class="token punctuation">{</span>
+    <span class="token comment">//methods</span>
+    <span class="token function">createNewSpaceShip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>spaceship<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//Delete the existing spaceship &#x1F680;&#x1F525;</span>
+            spaceship <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+            
+        <span class="token punctuation">}</span>
+        <span class="token comment">//Instantiating a new spaceship &#x1F386;&#x1F680;</span>
+        <span class="token keyword">let</span> newSpaceship <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ShipObject</span><span class="token punctuation">(</span>
+            reference<span class="token punctuation">.</span>width <span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span>
+            reference<span class="token punctuation">.</span>height<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span>
+            <span class="token number">30</span><span class="token punctuation">,</span>
+            <span class="token number">90</span><span class="token punctuation">,</span>
+            <span class="token number">360</span><span class="token punctuation">,</span>
+            <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>x<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span>y<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+         <span class="token comment">//Making the New Ship immune to Being Exploded</span>
+         newSpaceship<span class="token punctuation">.</span>immune <span class="token operator">=</span> <span class="token boolean">true</span>
+         <span class="token comment">//Switch off the Exploding Flag</span>
+         reference<span class="token punctuation">.</span>shipExploding <span class="token operator">=</span> <span class="token boolean">false</span>
+        <span class="token comment">//This just makes sure we can move afterwards</span>
+         newSpaceship<span class="token punctuation">.</span>thrusting <span class="token operator">=</span><span class="token boolean">false</span>
+         <span class="token keyword">return</span> spaceship <span class="token operator">=</span> newSpaceship<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Okay everything should be set now to make it work. In the animation loop we write the following</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">function</span> <span class="token function">gameAnimation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>reference<span class="token punctuation">.</span>shipExploding<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            spaceship<span class="token punctuation">.</span><span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            spaceship<span class="token punctuation">.</span><span class="token function">explodeShip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//Timeouts to carry out these functions after a certain period of time.        </span>
+            <span class="token function">setTimeout</span><span class="token punctuation">(</span>reference<span class="token punctuation">.</span>createNewSpaceShip<span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span>
+            <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token comment">//Removing the ships immunity after 5 secs</span>
+                spaceship<span class="token punctuation">.</span>immune <span class="token operator">=</span> <span class="token boolean">false</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">5000</span><span class="token punctuation">)</span>
+
+    <span class="token punctuation">}</span> 
+</pre><p>Using <code>setTimeout()</code> macro-promise we can do some time-delayed actions like, setting the explosion to last for 1 second, and then create a new spaceship. Once that promise is carried out we then look to remove the immunity from the ship after a period of 5 seconds...</p>
+<p>Hopefully all those flags we set work and you should have something that goes like this:</p>
+<figure>
+  <video controls="true" allowfullscreen="true" width="500" height="300">
+    <source src="./assets/videos/asteroidswhatitshouldlooklikesofar.mp4" type="video/mp4">
+    </video>
+</figure>
+<p>Right now tomorrow we will get this finished off...</p>
+<h2 class="mume-header" id="sources">Sources</h2>
+
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Asteroids is spaced-themed shooter arcade game that was created by Lyle Rains, Ed Logg, dominic Walsh and was released in Nov 1979 by Atari Inc. Link to <a href="https://en.wikipedia.org/wiki/Asteroids_(video_game)">wiki:Asteroids</a>. <a href="#fnref1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Jsdocs Further information on how to use JSDocs for better commentary and use of Intellisense with IDE&apos;s <a href="https://jsdoc.app/">Link to JSDoc spec</a>. <a href="#fnref2" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>Radians in JavaScript: <a href="http://www.idc-online.com/technical_references/pdfs/information_technology/Radians_and_degrees_in_Javascript.pdf">Link to paper</a> <a href="#fnref3" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>Further explanation on geometric distance.<br>
+<a href="https://ncalculators.com/geometry/length-between-two-points-calculator.htm#:~:text=The%20distance%20between%20two%20points%20is%20the%20length%20of%20the,length%20are%20called%20congruent%20segments.">Online Explaination.</a><br>
+<a href="https://en.wikipedia.org/wiki/Distance">wiki:Distance</a>. <a href="#fnref4" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>Further information on the maths behind calculating the distance between two circles <a href="https://www.whitman.edu/mathematics/calculus_online/section01.02.html">Link to explanation.</a><br>
+<a href="https://stackoverflow.com/questions/5509151/finding-the-distance-between-two-circles">Link to StackOverflow</a>. <a href="#fnref5" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p>Further information on using the Getter Object Accessor Function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get">MDN:function-Get</a> <a href="#fnref6" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+</ol>
+</section>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
